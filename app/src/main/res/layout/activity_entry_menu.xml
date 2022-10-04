@@ -11,7 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/description"
-        android:src="@drawable/food_image" />
+        android:src="@drawable/food_image"
+        tools:ignore="MissingConstraints"
+        android:scaleType="centerCrop"/>
 
     <RelativeLayout
         android:id="@+id/header"
@@ -32,35 +34,62 @@
             android:textStyle="italic" />
     </RelativeLayout>
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Login"
+        android:textColor="@color/white"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        android:id="@+id/textView"/>
+
     <LinearLayout
         android:id="@+id/LoginPanel"
         android:layout_width="match_parent"
         android:layout_height="350dp"
-        android:layout_marginTop="60dp"
-        android:background="@drawable/shape_login"
+        android:layout_marginTop="40dp"
         android:orientation="vertical"
         android:paddingLeft="50dp"
         android:paddingTop="70dp"
         android:paddingRight="50dp"
-        app:layout_constraintTop_toBottomOf="@id/header">
+        app:layout_constraintTop_toBottomOf="@id/header"
+        tools:ignore="MissingConstraints">
 
         <EditText
+            android:id="@+id/editText"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/Email"/>
+            android:hint="@string/Email"
+            android:textColorHint="@color/white"
+            android:backgroundTint="#CCCCCC"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            app:layout_constraintWidth_percent=".8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <EditText
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/Password"
-            android:inputType="textPassword"/>
+            android:inputType="textPassword"
+            app:layout_constraintTop_toBottomOf="@id/editText"
+            app:layout_constraintWidth_percent=".8"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:backgroundTint="#CCCCCC"
+            android:textColorHint="@color/white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="end"
-            android:text="@string/fp"/>
+            android:text="@string/fp"
+            android:textColor="@color/white"/>
     </LinearLayout>
 
     <Button
@@ -73,31 +102,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/LoginPanel" />
-
-    <TextView
-
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@id/LoginPanel"
-        android:text="@string/buttonLogin"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="-40dp"
-        android:textColor="@color/white"/>
-
-    <TextView
-        android:id="@+id/tvSignUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        app:layout_constraintTop_toTopOf="@id/LoginPanel"
-        android:text="@string/buttonSignUp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_marginTop="-40dp"
-        android:layout_marginEnd="20dp"
-        android:textColor="@color/white"
-        android:gravity="end"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -114,7 +118,7 @@
             android:textColor="@color/white"/>
 
         <TextView
-            android:id="@+id/tvSignUp2"
+            android:id="@+id/tvSignUp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
