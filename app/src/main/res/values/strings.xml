@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">FoodOrderApplication</string>
+    <string name="description">picture</string>
+    <string name="name">Food Order App</string>
+    <string name="author">Hung Pham</string>
+    <string name="Register">Register</string>
+    <string name="Login">Login</string>
+    <string name="ask">Don\'t have an account?</string>
+    <string name="buttonSignUp">SignUp</string>
+    <string name="Email">Email</string>
+    <string name="Password">Password</string>
+    <string name="fp">Forgot Password ?</string>
+    <string name="ask2">Already had account ?</string>
+    <string name="buttonLogin">Login</string>
+    <string name="ConfirmPassword">Confirm Password</string>
+    <string name="Username">Username</string>
 </resources>
