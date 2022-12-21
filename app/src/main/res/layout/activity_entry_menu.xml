@@ -4,16 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EntryMenu">
+    tools:context=".activities.EntryMenu">
 
     <ImageView
         android:id="@+id/bgImage"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:contentDescription="@string/description"
+        android:scaleType="centerCrop"
         android:src="@drawable/food_image"
-        tools:ignore="MissingConstraints"
-        android:scaleType="centerCrop"/>
+        tools:ignore="MissingConstraints" />
 
     <RelativeLayout
         android:id="@+id/header"
@@ -35,17 +35,17 @@
     </RelativeLayout>
 
     <TextView
+        android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/Login"
+        android:textAlignment="center"
         android:textColor="@color/white"
         android:textSize="19sp"
         android:textStyle="bold"
-        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header"
-        android:id="@+id/textView"/>
+        app:layout_constraintTop_toBottomOf="@id/header" />
 
     <LinearLayout
         android:id="@+id/LoginPanel"
@@ -59,49 +59,64 @@
         app:layout_constraintTop_toBottomOf="@id/header"
         tools:ignore="MissingConstraints">
 
-        <EditText
-            android:id="@+id/editText"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputEmail"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/Email"
+            android:layout_height="wrap_content"
             android:textColorHint="@color/white"
-            android:backgroundTint="#CCCCCC"
-            app:layout_constraintTop_toBottomOf="@id/textView"
-            app:layout_constraintWidth_percent=".8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:boxBackgroundMode="outline">
 
-        <EditText
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/Email"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView"
+                app:layout_constraintWidth_percent=".8" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputPass"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/Password"
-            android:inputType="textPassword"
-            app:layout_constraintTop_toBottomOf="@id/editText"
-            app:layout_constraintWidth_percent=".8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:backgroundTint="#CCCCCC"
-            android:textColorHint="@color/white"/>
+            android:layout_height="wrap_content"
+            android:textColorHint="@color/white"
+            app:boxBackgroundMode="outline">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/Password"
+                android:inputType="textPassword"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/inputEmail"
+                app:layout_constraintWidth_percent=".8" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
+            android:id="@+id/forgotP"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:gravity="end"
             android:text="@string/fp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
     </LinearLayout>
 
     <Button
+        android:id="@+id/btnLogin"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginBottom="-25dp"
         android:background="@drawable/button_custom"
         android:text="@string/Login"
         android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@id/LoginPanel"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/LoginPanel" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -115,7 +130,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/ask"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tvSignUp"
@@ -124,6 +139,6 @@
             android:layout_marginStart="15dp"
             android:text="@string/buttonSignUp"
             android:textColor="@color/semi_red"
-            android:textSize="20sp"/>
+            android:textSize="20sp" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cardView"
+    android:backgroundTint="@color/white"
+    android:outlineAmbientShadowColor="@color/semi_red"
+    android:outlineSpotShadowColor="@color/semi_red"
+    app:strokeColor="@color/semi_red"
+    android:layout_width="120dp"
+    android:layout_height="wrap_content"
+    app:cardElevation="15dp"
+    app:strokeWidth="1.5dp"
+    android:layout_marginHorizontal="5dp"
+    app:cardCornerRadius="23dp">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="50dp"
+            android:id="@+id/item1"
+            android:layout_gravity="center"
+            android:src="@drawable/hamburger"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/item1_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:textStyle="bold"
+            android:textColor="@color/semi_red"
+            android:text="@string/burgers" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

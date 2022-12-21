@@ -1,4 +1,4 @@
-package com.example.foodorderapplication;
+package com.example.foodorderapplication.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.foodorderapplication.R;
 
 public class MainActivity extends AppCompatActivity {
     ImageView imageView;
@@ -32,9 +34,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(MainActivity.this,EntryMenu.class);
+            Intent intent = new Intent(MainActivity.this, EntryMenu.class);
             startActivity(intent);
             finish();
-        },3000);
+        }, 3000);
     }
 }
