@@ -6,6 +6,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -137,5 +138,10 @@ public class ShowFromCategory extends AppCompatActivity {
                         }
                     });
         }
+    }
+    public void onBackPressed() {
+        Intent intent=new Intent(ShowFromCategory.this,Home.class);
+        startActivity(intent);
+        finish();
     }
 }

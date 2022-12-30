@@ -3,6 +3,7 @@ package com.example.foodorderapplication.activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -169,5 +170,12 @@ public class DetailedActivity extends AppCompatActivity {
                         finish();
                     }
                 });
+
+    }
+
+    public void onBackPressed() {
+        Intent intent=new Intent(DetailedActivity.this,Home.class);
+        startActivity(intent);
+        finish();
     }
 }

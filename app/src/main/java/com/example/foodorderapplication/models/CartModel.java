@@ -7,6 +7,15 @@ public class CartModel {
     String productPrice;
     String totalQuantity;
     int totalPrice;
+    String documentId;
+
+    public String getDocumentId() {
+        return documentId;
+    }
+
+    public void setDocumentId(String documentId) {
+        this.documentId = documentId;
+    }
 
     public CartModel() {
 

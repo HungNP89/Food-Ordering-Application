@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.widget.Toolbar;
@@ -35,6 +36,7 @@ public class CartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     List<CartModel> cartModel;
     CartAdapter cartAdapter;
+    Button btnPayment;
 
     private FirebaseAuth fAuth;
     private FirebaseFirestore fs;
@@ -48,6 +50,7 @@ public class CartActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cart);
 
         cart_total_price = findViewById(R.id.cart_total_price);
+        btnPayment = findViewById(R.id.btn_payment);
         fAuth = FirebaseAuth.getInstance();
         fs = FirebaseFirestore.getInstance();
 
@@ -74,13 +77,23 @@ public class CartActivity extends AppCompatActivity {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (DocumentSnapshot ds : task.getResult().getDocuments()) {
+                                String documentId = ds.getId();
                                 CartModel cartModel1 = ds.toObject(CartModel.class);
+                                cartModel1.setDocumentId(documentId);
                                 cartModel.add(cartModel1);
                                 cartAdapter.notifyDataSetChanged();
                             }
                         }
                     }
                 });
+        btnPayment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent moveToPayment = new Intent(CartActivity.this,Payment.class);
+                startActivity(moveToPayment);
+                finish();
+            }
+        });
     }
 
     public BroadcastReceiver receiver = new BroadcastReceiver() {
@@ -90,4 +103,10 @@ public class CartActivity extends AppCompatActivity {
             cart_total_price.setText("Total Amount :" + totalBill);
         }
     };
+
+    public void onBackPressed() {
+        Intent intent=new Intent(CartActivity.this,Home.class);
+        startActivity(intent);
+        finish();
+    }
 }
