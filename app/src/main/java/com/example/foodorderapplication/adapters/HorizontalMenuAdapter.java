@@ -3,7 +3,6 @@ package com.example.foodorderapplication.adapters;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.foodorderapplication.Add.GlideApp;
 import com.example.foodorderapplication.R;
 import com.example.foodorderapplication.activities.ShowFromCategory;
 import com.example.foodorderapplication.interfaces.UpdateVerticalMenu;
 import com.example.foodorderapplication.models.HorizontalMenuModel;
-import com.example.foodorderapplication.models.VerticalMenuModel;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
-import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 

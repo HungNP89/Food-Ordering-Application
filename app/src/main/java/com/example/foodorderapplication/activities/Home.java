@@ -4,8 +4,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.Menu;
+import android.widget.Toast;
 
 import com.example.foodorderapplication.R;
+import com.example.foodorderapplication.ui.home.CartFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -41,7 +43,7 @@ public class Home extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile,R.id.nav_cart)
+                R.id.nav_home, R.id.nav_profile,R.id.nav_cart,R.id.nav_history,R.id.nav_review)
                 .setOpenableLayout(drawer)
                 .build();
         NavHostFragment navHostFragment
@@ -73,9 +75,8 @@ public class Home extends AppCompatActivity {
         if (id == R.id.menu_logout) {
             auth.signOut();
             startActivity(new Intent(Home.this, EntryMenu.class));
+            Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();
             finish();
-        } else if (id == R.id.menu_cart) {
-            startActivity(new Intent(Home.this, CartActivity.class));
         }
         return super.onOptionsItemSelected(item);
     }

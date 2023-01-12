@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_marginBottom="5dp">
 
     <LinearLayout
@@ -11,18 +12,18 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/deal_item1"
             android:layout_width="130dp"
             android:layout_height="110dp"
             android:layout_margin="10dp"
-            android:id="@+id/deal_item1"
             android:scaleType="centerCrop"
-            android:src="@drawable/pho"/>
+            android:src="@drawable/pho" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_marginStart="4dp">
+            android:layout_marginStart="4dp"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/deal_item_name"
@@ -36,57 +37,48 @@
                 android:textSize="24sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/description"
-                android:text="@string/des"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:textColor="@color/black"
-                android:singleLine="true"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp">
-            </LinearLayout>
+                android:layout_marginTop="4dp"
+                android:orientation="horizontal"></LinearLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <ImageView
+                    android:id="@+id/euro_symbol"
                     android:layout_width="15dp"
                     android:layout_height="15dp"
                     android:src="@drawable/ic_baseline_euro_symbol_24"
-                    android:id="@+id/euro_symbol"
                     app:layout_constraintBottom_toBottomOf="@id/item_price"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="@id/item_price"
                     app:tint="@color/black" />
 
                 <TextView
+                    android:id="@+id/item_price"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/item_price"
                     android:text="@string/amount"
-                    android:textStyle="bold"
                     android:textColor="@color/black"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/euro_symbol"/>
-
-                <Button
-                    android:layout_width="97dp"
-                    android:layout_height="wrap_content"
-                    android:text="Add to Cart"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    android:textAllCaps="false"
-                    android:textSize="15sp"
                     android:textStyle="bold"
-                    android:layout_marginEnd="10dp"/>
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/euro_symbol"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <RatingBar
+                    android:id="@+id/rating_food4"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="16dp"
+                    android:layout_marginStart="20dp"
+                    android:numStars="5"
+                    android:rating="4.5"
+                    app:layout_constraintTop_toBottomOf="@id/item_price"
+                    tools:ignore="MissingConstraints" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
     </LinearLayout>

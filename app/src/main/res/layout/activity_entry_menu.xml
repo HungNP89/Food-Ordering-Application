@@ -96,11 +96,12 @@
                 app:layout_constraintWidth_percent=".8" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
         <TextView
             android:id="@+id/forgotP"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="140dp"
             android:gravity="end"
             android:text="@string/fp"
             android:textColor="@color/white" />

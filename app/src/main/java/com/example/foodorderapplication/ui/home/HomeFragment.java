@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.SearchView;
@@ -16,26 +15,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderapplication.R;
 import com.example.foodorderapplication.adapters.HorizontalMenuAdapter;
-import com.example.foodorderapplication.adapters.VerticalMenuAdapter;
 import com.example.foodorderapplication.adapters.VerticalMenuAdapter2;
-import com.example.foodorderapplication.interfaces.UpdateVerticalMenu;
 import com.example.foodorderapplication.models.HorizontalMenuModel;
-import com.example.foodorderapplication.models.VerticalMenuModel;
 import com.example.foodorderapplication.models.VerticalMenuModel2;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 
 public class HomeFragment extends Fragment  {
@@ -138,7 +127,7 @@ public class HomeFragment extends Fragment  {
             }
         }
         if (filteredList.isEmpty()) {
-            Toast.makeText(getActivity(), "No Data Found", Toast.LENGTH_SHORT).show();
+            Log.w("","Error");
         } else {
             verticalMenuAdapter2.filterList(filteredList);
         }

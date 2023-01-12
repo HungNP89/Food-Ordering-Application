@@ -20,7 +20,7 @@
             android:name=".activities.Payment"
             android:exported="false" />
         <activity
-            android:name=".activities.CartActivity"
+            android:name=".unused.CartActivity"
             android:exported="false" />
         <activity
             android:name=".activities.ShowFromCategory"

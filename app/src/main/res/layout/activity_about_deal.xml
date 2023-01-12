@@ -28,9 +28,13 @@
                 android:id="@+id/deal_items_image"/>
 
             <androidx.appcompat.widget.Toolbar
+                app:titleTextColor="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:titleTextColor="@color/white" />
+                android:layout_height="wrap_content"
+                android:id="@+id/deal_toolbar"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 

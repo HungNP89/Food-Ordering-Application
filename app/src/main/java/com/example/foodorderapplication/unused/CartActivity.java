@@ -1,4 +1,4 @@
-package com.example.foodorderapplication.activities;
+package com.example.foodorderapplication.unused;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.foodorderapplication.R;
+import com.example.foodorderapplication.activities.Home;
+import com.example.foodorderapplication.activities.Payment;
 import com.example.foodorderapplication.adapters.CartAdapter;
 import com.example.foodorderapplication.models.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -63,7 +65,7 @@ public class CartActivity extends AppCompatActivity {
             }
         });
         LocalBroadcastManager.getInstance(this)
-                .registerReceiver(receiver,new IntentFilter("TotalAmount"));
+                .registerReceiver(receiver, new IntentFilter("TotalAmount"));
 
         recyclerView = findViewById(R.id.cart_rec);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -89,7 +91,7 @@ public class CartActivity extends AppCompatActivity {
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent moveToPayment = new Intent(CartActivity.this,Payment.class);
+                Intent moveToPayment = new Intent(CartActivity.this, Payment.class);
                 startActivity(moveToPayment);
                 finish();
             }
@@ -99,13 +101,13 @@ public class CartActivity extends AppCompatActivity {
     public BroadcastReceiver receiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int totalBill = intent.getIntExtra("totalAmount",0);
+            int totalBill = intent.getIntExtra("totalAmount", 0);
             cart_total_price.setText("Total Amount :" + totalBill);
         }
     };
 
     public void onBackPressed() {
-        Intent intent=new Intent(CartActivity.this,Home.class);
+        Intent intent = new Intent(CartActivity.this, Home.class);
         startActivity(intent);
         finish();
     }

@@ -1,24 +1,34 @@
 package com.example.foodorderapplication.models;
 
-public class DealMenuModel {
+import java.io.Serializable;
 
-    int image;
+public class DealMenuModel implements Serializable {
+
+    String image;
     String name;
     String description;
-    String price;
+    int price;
+    String discount;
+    Float rating;
 
-    public DealMenuModel(int image, String name, String description, String price) {
+    public DealMenuModel(String image, String name, String description, int price, Float rating, String discount) {
         this.image = image;
         this.name = name;
         this.description = description;
         this.price = price;
+        this.rating = rating;
+        this.discount = discount;
     }
 
-    public int getImage() {
+    public DealMenuModel() {
+
+    }
+
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 
@@ -38,12 +48,28 @@ public class DealMenuModel {
         this.description = description;
     }
 
-    public String getPrice() {
+    public int getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(String discount) {
+        this.discount = discount;
+    }
+
+    public Float getRating() {
+        return rating;
+    }
+
+    public void setRating(Float rating) {
+        this.rating = rating;
     }
 
 }

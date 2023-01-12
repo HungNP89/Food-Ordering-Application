@@ -28,4 +28,16 @@
         android:name="com.example.foodorderapplication.ui.home.CartFragment"
         android:label="@string/Cart"
         tools:layout="@layout/fragment_cart"/>
+
+    <fragment
+        android:id="@+id/nav_history"
+        android:name="com.example.foodorderapplication.ui.home.OrderHistoryFragment"
+        android:label="@string/Cart"
+        tools:layout="@layout/fragment_order_history"/>
+
+    <fragment
+        android:id="@+id/nav_review"
+        android:name="com.example.foodorderapplication.ui.home.FeedbackFragment"
+        android:label="@string/Cart"
+        tools:layout="@layout/fragment_feedback"/>
 </navigation>

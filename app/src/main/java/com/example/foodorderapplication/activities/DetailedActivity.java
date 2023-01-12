@@ -17,6 +17,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.foodorderapplication.Add.GlideApp;
 import com.example.foodorderapplication.R;
 import com.example.foodorderapplication.adapters.VerticalMenuAdapter2;
+import com.example.foodorderapplication.models.DealMenuModel;
 import com.example.foodorderapplication.models.ShowFromCatModel;
 import com.example.foodorderapplication.models.VerticalMenuModel2;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -44,6 +45,7 @@ public class DetailedActivity extends AppCompatActivity {
 
     VerticalMenuModel2 verticalMenuModel2 = null;
     ShowFromCatModel showCat = null;
+    DealMenuModel showDeal = null;
 
     Toolbar tb;
     private FirebaseDatabase firebaseDatabase;
@@ -85,6 +87,8 @@ public class DetailedActivity extends AppCompatActivity {
             verticalMenuModel2 = (VerticalMenuModel2) obj;
         } else if (obj instanceof ShowFromCatModel) {
             showCat = (ShowFromCatModel) obj;
+        } else if (obj instanceof DealMenuModel) {
+            showDeal = (DealMenuModel) obj;
         }
 
         if (verticalMenuModel2 != null) {
@@ -107,6 +111,16 @@ public class DetailedActivity extends AppCompatActivity {
             totalPrice = showCat.getPrice() * totalQuantity;
         }
 
+        if (showDeal != null) {
+            GlideApp.with(getApplicationContext()).load(showDeal.getImage()).into(imageView);
+            name.setText(showDeal.getName());
+            description.setText(showDeal.getDescription());
+            price.setText(String.valueOf(showDeal.getPrice()));
+            rating.setRating(showDeal.getRating());
+
+            totalPrice = showDeal.getPrice() * totalQuantity;
+        }
+
         addToCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -126,6 +140,9 @@ public class DetailedActivity extends AppCompatActivity {
                     }
                     if (showCat != null) {
                         totalPrice = showCat.getPrice() * totalQuantity;
+                    }
+                    if (showDeal != null) {
+                        totalPrice = showDeal.getPrice() * totalQuantity;
                     }
                 }
             }
@@ -174,7 +191,7 @@ public class DetailedActivity extends AppCompatActivity {
     }
 
     public void onBackPressed() {
-        Intent intent=new Intent(DetailedActivity.this,Home.class);
+        Intent intent = new Intent(DetailedActivity.this, Home.class);
         startActivity(intent);
         finish();
     }

@@ -62,7 +62,7 @@ public class ForgotPassword extends AppCompatActivity {
         tvLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent movedToLogin = new Intent(ForgotPassword.this,EntryMenu.class);
+                Intent movedToLogin = new Intent(ForgotPassword.this, EntryMenu.class);
                 startActivity(movedToLogin);
                 finish();
             }

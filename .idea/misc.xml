@@ -18,7 +18,7 @@
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/activity_forgot_password.xml" value="0.1" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/activity_home.xml" value="0.358695652173913" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/activity_payment.xml" value="0.1" />
+        <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/activity_payment.xml" value="0.25" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/activity_register_menu.xml" value="0.33" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/activity_show_from_category.xml" value="0.1" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/app_bar_home.xml" value="0.358695652173913" />
@@ -26,7 +26,7 @@
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/content_home.xml" value="0.358695652173913" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/deal_items.xml" value="0.358695652173913" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/deals_menu.xml" value="0.358695652173913" />
-        <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/fragment_cart.xml" value="0.3484375" />
+        <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/fragment_cart.xml" value="0.25" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/fragment_deals.xml" value="0.358695652173913" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/fragment_favorites.xml" value="0.358695652173913" />
         <entry key="..\:/Projects/FoodOrderApplication/app/src/main/res/layout/fragment_fullscreen.xml" value="0.358695652173913" />

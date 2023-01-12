@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import io.paperdb.Paper;
 
 public class EntryMenu extends AppCompatActivity {
     TextView textViewSignUp, forgotP;
@@ -60,6 +64,7 @@ public class EntryMenu extends AppCompatActivity {
                                 if (task.isSuccessful()) {
                                     mDialog.dismiss();
 
+
                                     if (fAuth.getCurrentUser().isEmailVerified()) {
                                         mDialog.dismiss();
                                         Toast.makeText(EntryMenu.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
@@ -81,6 +86,7 @@ public class EntryMenu extends AppCompatActivity {
                     }
                 }
             });
+
             textViewSignUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -101,6 +107,7 @@ public class EntryMenu extends AppCompatActivity {
             Toast.makeText(this, e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
+
 
     String pattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
 

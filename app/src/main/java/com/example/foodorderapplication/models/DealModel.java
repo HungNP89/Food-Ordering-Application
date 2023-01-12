@@ -2,23 +2,27 @@ package com.example.foodorderapplication.models;
 
 public class DealModel {
 
-    int image;
+    String image;
     String name;
     String discount;
     String type;
 
-    public DealModel(int image, String name, String discount, String type) {
+    public DealModel(String image, String name, String discount, String type) {
         this.image = image;
         this.name = name;
         this.discount = discount;
         this.type = type;
     }
 
-    public int getImage() {
+    public DealModel() {
+
+    }
+
+    public String getImage() {
         return image;
     }
 
-    public void setImage(int image) {
+    public void setImage(String image) {
         this.image = image;
     }
 

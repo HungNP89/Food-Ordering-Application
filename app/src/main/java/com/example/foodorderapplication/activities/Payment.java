@@ -1,175 +1,168 @@
 package com.example.foodorderapplication.activities;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.browser.customtabs.CustomTabsIntent;
 
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.example.foodorderapplication.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
 import com.stripe.android.PaymentConfiguration;
 import com.stripe.android.paymentsheet.PaymentSheet;
 import com.stripe.android.paymentsheet.PaymentSheetResult;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.Base64;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
+import cz.msebera.android.httpclient.Header;
+import cz.msebera.android.httpclient.HttpEntity;
+import cz.msebera.android.httpclient.entity.StringEntity;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
+
 public class Payment extends AppCompatActivity {
+
+    Button stripePayment, paypalPayment;
 
     String SECRET_KEY = "sk_test_51MHoNsENJjpyig3UlZta5JBOqeSTFq0bUY19vqNZM0NppSRsjiqY8ZogYhbUFIdJcoHbySdYoQligIGHZbrx8odU0040FSwHGL";
     String PUBLIC_KEY = "pk_test_51MHoNsENJjpyig3U13dJ82cxwNBShJ8DcmA7K4TIIg9eP8lrW8vp5C1zL8yYIWdTTMArG8NYxngscZzPbp7u3Usi00JAUHocWE";
-    PaymentSheet paymentSheet;
 
-    String customerID, EphemeralKey, ClientSecret;
+    String CustomerID, EphericalKey, ClientSecret;
+    String accessToken;
+    FirebaseAuth FAuth;
+
+    private static final String TAG = "CheckoutActivity";
+    private static final String BACKEND_URL = "http://10.0.2.2:4242";
+
+    private String paymentIntentClientSecret;
+    private PaymentSheet paymentSheet;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
-        PaymentConfiguration.init(this,PUBLIC_KEY);
-
-        paymentSheet = new PaymentSheet(this, paymentSheetResult -> {
-            onPaymentResult(paymentSheetResult);
+        // Hook up the pay button
+        stripePayment = findViewById(R.id.payment_stripe);
+        stripePayment.setOnClickListener(view -> {
+            onPayClicked();
         });
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "https://api.stripe.com/v1/customers",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject object = new JSONObject(response);
-                            customerID = object.getString("id");
-                            Toast.makeText(Payment.this,customerID,Toast.LENGTH_SHORT).show();
-                            getEphemeralKey(customerID);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> header = new HashMap<>();
-                header.put("Authorization","Bearer "+SECRET_KEY);
-                return header;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(Payment.this);
-        requestQueue.add(stringRequest);
+        stripePayment.setEnabled(false);
+        paymentSheet = new PaymentSheet(this, this::onPaymentSheetResult);
+        fetchPaymentIntent();
     }
 
-    private void onPaymentResult(PaymentSheetResult paymentSheetResult) {
-        if(paymentSheetResult instanceof PaymentSheetResult.Completed) {
-            Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+    private void showAlert(String title, @Nullable String message) {
+        runOnUiThread(() -> {
+            AlertDialog dialog = new AlertDialog.Builder(this)
+                    .setTitle(title)
+                    .setMessage(message)
+                    .setPositiveButton("Ok", null)
+                    .create();
+            dialog.show();
+        });
+    }
+
+    private void showToast(String message) {
+        runOnUiThread(() -> Toast.makeText(this, message, Toast.LENGTH_LONG).show());
+    }
+
+    private void fetchPaymentIntent() {
+        final String shoppingCartContent = "{\"items\": [ {\"id\":\"xl-tshirt\"}]}";
+
+        final RequestBody requestBody = RequestBody.create(
+                MediaType.get("application/json; charset=utf-8"),
+                shoppingCartContent
+        );
+
+        Request request = new Request.Builder()
+                .url(BACKEND_URL + "/create-payment-intent")
+                .post(requestBody)
+                .build();
+
+        new OkHttpClient()
+                .newCall(request)
+                .enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                        showAlert("Failed to load data", "Error: " + e.toString());
+                    }
+
+                    @Override
+                    public void onResponse(Call call, okhttp3.Response response) throws IOException {
+                        if (!response.isSuccessful()) {
+                            showAlert(
+                                    "Failed to load page",
+                                    "Error: " + response.toString()
+                            );
+                        } else {
+                            final JSONObject responseJson = parseResponse(response.body());
+                            paymentIntentClientSecret = responseJson.optString("client_secret");
+                            Toast.makeText(Payment.this, paymentIntentClientSecret, Toast.LENGTH_SHORT).show();
+                            runOnUiThread(() -> stripePayment.setEnabled(true));
+                            Log.i(TAG, "Retrieved PaymentIntent");
+                        }
+                    }
+                });
+    }
+
+    private JSONObject parseResponse(ResponseBody responseBody) {
+        if (responseBody != null) {
+            try {
+                return new JSONObject(responseBody.string());
+            } catch (IOException | JSONException e) {
+                Log.e(TAG, "Error parsing response", e);
+            }
+        }
+
+        return new JSONObject();
+    }
+
+    private void onPayClicked() {
+        paymentSheet.presentWithPaymentIntent(paymentIntentClientSecret, new PaymentSheet.Configuration("Entropy9029"));
+    }
+
+
+    private void onPaymentSheetResult(
+            final PaymentSheetResult paymentSheetResult
+    ) {
+        if (paymentSheetResult instanceof PaymentSheetResult.Completed) {
+            showToast("Payment complete!");
+        } else if (paymentSheetResult instanceof PaymentSheetResult.Canceled) {
+            Log.i(TAG, "Payment canceled!");
+        } else if (paymentSheetResult instanceof PaymentSheetResult.Failed) {
+            Throwable error = ((PaymentSheetResult.Failed) paymentSheetResult).getError();
+            showAlert("Payment failed", error.getLocalizedMessage());
         }
     }
 
-    private void getEphemeralKey(String customerID) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "https://api.stripe.com/v1/ephemeral_keys",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject object = new JSONObject(response);
-                            EphemeralKey = object.getString("id");
-                            Toast.makeText(Payment.this,EphemeralKey,Toast.LENGTH_SHORT).show();
-                            getClientSecret(customerID,EphemeralKey);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                Map<String,String> header = new HashMap<>();
-                header.put("Authorization","Bearer "+SECRET_KEY);
-                header.put("Stripe-Version","2022-11-15");
-                return header;
-            }
-
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("customer",customerID);
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(Payment.this);
-        requestQueue.add(stringRequest);
-
-    }
-
-    private void getClientSecret(String customerID, String ephemeralKey) {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST,
-                "https://api.stripe.com/v1/payment_intents",
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        try {
-                            JSONObject object = new JSONObject(response);
-                            ClientSecret = object.getString("client_secret");
-                            Toast.makeText(Payment.this,ClientSecret,Toast.LENGTH_SHORT).show();
-                            PaymentFlow();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        }){
-            @Override
-            public Map<String,String> getHeaders() throws AuthFailureError {
-                Map<String, String> header = new HashMap<>();
-                header.put("Authorization","Bearer "+SECRET_KEY);
-                return header;
-            }
-            @Override
-            public Map<String,String> getParams() throws AuthFailureError {
-                Map<String,String> params = new HashMap<>();
-                params.put("customer",customerID);
-                params.put("amount","10" + "00");
-                params.put("currency","eur");
-                params.put("automatic_payment_methods[enabled]","true");
-                return params;
-            }
-        };
-
-        RequestQueue requestQueue = Volley.newRequestQueue(Payment.this);
-        requestQueue.add(stringRequest);
-    }
-
-    private void PaymentFlow() {
-        paymentSheet.presentWithPaymentIntent(ClientSecret,new PaymentSheet.Configuration("Entropy Company",
-                new PaymentSheet.CustomerConfiguration(
-                        customerID,
-                        EphemeralKey
-                )));
-    }
 }

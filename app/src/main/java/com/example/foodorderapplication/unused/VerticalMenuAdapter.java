@@ -1,4 +1,4 @@
-package com.example.foodorderapplication.adapters;
+package com.example.foodorderapplication.unused;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,11 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderapplication.R;
-import com.example.foodorderapplication.models.HorizontalMenuModel;
-import com.example.foodorderapplication.models.VerticalMenuModel;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class VerticalMenuAdapter extends RecyclerView.Adapter<VerticalMenuAdapter.ViewHolder> {
 

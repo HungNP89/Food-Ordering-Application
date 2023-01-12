@@ -1,4 +1,4 @@
-package com.example.foodorderapplication.models;
+package com.example.foodorderapplication.unused;
 
 public class VerticalMenuModel {
     int image;
