@@ -18,8 +18,8 @@ import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.foodorderapplication.R;
-import com.example.foodorderapplication.activities.Home;
-import com.example.foodorderapplication.activities.Payment;
+import com.example.foodorderapplication.activities.HomeActivity;
+import com.example.foodorderapplication.activities.PaymentActivity;
 import com.example.foodorderapplication.adapters.CartAdapter;
 import com.example.foodorderapplication.models.CartModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -91,7 +91,7 @@ public class CartActivity extends AppCompatActivity {
         btnPayment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent moveToPayment = new Intent(CartActivity.this, Payment.class);
+                Intent moveToPayment = new Intent(CartActivity.this, PaymentActivity.class);
                 startActivity(moveToPayment);
                 finish();
             }
@@ -107,7 +107,7 @@ public class CartActivity extends AppCompatActivity {
     };
 
     public void onBackPressed() {
-        Intent intent = new Intent(CartActivity.this, Home.class);
+        Intent intent = new Intent(CartActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

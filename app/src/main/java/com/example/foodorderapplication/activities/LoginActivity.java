@@ -5,13 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,9 +21,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import io.paperdb.Paper;
-
-public class EntryMenu extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     TextView textViewSignUp, forgotP;
     TextInputLayout Email, Password;
     Button signIn;
@@ -34,7 +31,7 @@ public class EntryMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_entry_menu);
+        setContentView(R.layout.activity_login);
 
         try {
             Email = findViewById(R.id.inputEmail);
@@ -51,7 +48,7 @@ public class EntryMenu extends AppCompatActivity {
                     pwd = Password.getEditText().getText().toString().trim();
 
                     if (isValid()) {
-                        final ProgressDialog mDialog = new ProgressDialog(EntryMenu.this);
+                        final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
                         mDialog.setCancelable(false);
                         mDialog.setCanceledOnTouchOutside(false);
                         mDialog.setMessage("SignIn is now processing , please wait ...");
@@ -67,18 +64,24 @@ public class EntryMenu extends AppCompatActivity {
 
                                     if (fAuth.getCurrentUser().isEmailVerified()) {
                                         mDialog.dismiss();
-                                        Toast.makeText(EntryMenu.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
-                                        Intent moveToMain = new Intent(EntryMenu.this, Home.class);
-                                        startActivity(moveToMain);
-                                        finish();
+                                        Toast.makeText(LoginActivity.this, "Login Successfully!", Toast.LENGTH_SHORT).show();
+                                        Handler handler = new Handler();
+                                        handler.postDelayed(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Intent moveToMain = new Intent(LoginActivity.this, HomeActivity.class);
+                                                startActivity(moveToMain);
+                                                finish();
+                                            }
+                                        },2000);
                                         Log.w("", "login checked!");
                                     } else {
-                                        Toast.makeText(EntryMenu.this, "Please verify your email first", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(LoginActivity.this, "Please verify your email first", Toast.LENGTH_SHORT).show();
                                         Log.w("", "Login failed");
                                     }
                                 } else {
                                     mDialog.dismiss();
-                                    Toast.makeText(EntryMenu.this, "Wrong account", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(LoginActivity.this, "Wrong account", Toast.LENGTH_SHORT).show();
                                     Log.w("", "Error");
                                 }
                             }
@@ -90,7 +93,7 @@ public class EntryMenu extends AppCompatActivity {
             textViewSignUp.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent movedSignUp = new Intent(EntryMenu.this, RegisterMenu.class);
+                    Intent movedSignUp = new Intent(LoginActivity.this, RegisterActivity.class);
                     startActivity(movedSignUp);
                     finish();
                 }
@@ -98,7 +101,7 @@ public class EntryMenu extends AppCompatActivity {
             forgotP.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent movedForgotP = new Intent(EntryMenu.this, ForgotPassword.class);
+                    Intent movedForgotP = new Intent(LoginActivity.this, ForgotPasswordActivity.class);
                     startActivity(movedForgotP);
                     finish();
                 }

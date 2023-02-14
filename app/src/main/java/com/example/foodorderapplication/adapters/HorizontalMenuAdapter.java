@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.foodorderapplication.Add.GlideApp;
 import com.example.foodorderapplication.R;
-import com.example.foodorderapplication.activities.ShowFromCategory;
+import com.example.foodorderapplication.activities.FoodByCategoryActivity;
 import com.example.foodorderapplication.interfaces.UpdateVerticalMenu;
 import com.example.foodorderapplication.models.HorizontalMenuModel;
 
@@ -54,7 +54,7 @@ public class HorizontalMenuAdapter extends RecyclerView.Adapter<HorizontalMenuAd
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, ShowFromCategory.class);
+                Intent intent = new Intent(context, FoodByCategoryActivity.class);
                 intent.putExtra("foodType", list.get(holder.getAbsoluteAdapterPosition()).getType());
                 context.startActivity(intent);
             }

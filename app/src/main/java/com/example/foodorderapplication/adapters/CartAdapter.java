@@ -47,15 +47,15 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.ViewHolder> {
     public void onBindViewHolder(@NonNull CartAdapter.ViewHolder holder, int position) {
         holder.date.setText(list.get(position).getProductDate());
         holder.time.setText(list.get(position).getCurrentTime());
-        holder.price.setText(list.get(position).getProductPrice());
+        holder.price.setText(String.valueOf(list.get(position).getProductPrice()));
         holder.name.setText(list.get(position).getProductName());
         holder.totalPrice.setText(String.valueOf(list.get(position).getTotalPrice()));
         holder.totalQuantity.setText(list.get(position).getTotalQuantity());
         holder.iv_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fStore.collection("AddToCart").document(firebaseAuth.getCurrentUser().getUid())
-                        .collection("Users")
+                fStore.collection("UserOrder").document(firebaseAuth.getCurrentUser().getUid())
+                        .collection("Add To Cart")
                         .document(list.get(holder.getAbsoluteAdapterPosition()).getDocumentId())
                         .delete()
                         .addOnCompleteListener(new OnCompleteListener<Void>() {

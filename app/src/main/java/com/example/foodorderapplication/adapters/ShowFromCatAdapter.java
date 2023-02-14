@@ -15,10 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.foodorderapplication.Add.GlideApp;
 import com.example.foodorderapplication.R;
 import com.example.foodorderapplication.activities.DetailedActivity;
-import com.example.foodorderapplication.activities.ShowFromCategory;
 import com.example.foodorderapplication.models.ShowFromCatModel;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class ShowFromCatAdapter extends RecyclerView.Adapter<ShowFromCatAdapter.ViewHolder> {

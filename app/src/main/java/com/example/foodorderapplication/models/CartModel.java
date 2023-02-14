@@ -1,10 +1,12 @@
 package com.example.foodorderapplication.models;
 
-public class CartModel {
+import java.io.Serializable;
+
+public class CartModel implements Serializable{
     String currentTime;
     String productDate;
     String productName;
-    String productPrice;
+    int productPrice;
     String totalQuantity;
     int totalPrice;
     String documentId;
@@ -20,7 +22,7 @@ public class CartModel {
     public CartModel() {
 
     }
-    public CartModel(String currentTime, String productDate, String productName, String productPrice, String totalQuantity, int totalPrice) {
+    public CartModel(String currentTime, String productDate, String productName, int productPrice, String totalQuantity, int totalPrice) {
         this.currentTime = currentTime;
         this.productDate = productDate;
         this.productName = productName;
@@ -53,11 +55,11 @@ public class CartModel {
         this.productName = productName;
     }
 
-    public String getProductPrice() {
+    public int getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(String productPrice) {
+    public void setProductPrice(int productPrice) {
         this.productPrice = productPrice;
     }
 

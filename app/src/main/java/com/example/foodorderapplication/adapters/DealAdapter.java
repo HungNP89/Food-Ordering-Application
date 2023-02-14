@@ -11,10 +11,9 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.foodorderapplication.Add.GlideApp;
 import com.example.foodorderapplication.R;
-import com.example.foodorderapplication.activities.AboutDealActivity;
+import com.example.foodorderapplication.activities.DiscountActivity;
 import com.example.foodorderapplication.models.DealModel;
 
 import java.util.List;
@@ -43,7 +42,7 @@ public class DealAdapter extends RecyclerView.Adapter<DealAdapter.ViewHolder> {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(context, AboutDealActivity.class);
+                Intent intent = new Intent(context, DiscountActivity.class);
                 intent.putExtra("discount", list.get(holder.getAbsoluteAdapterPosition()).getType());
                 context.startActivity(intent);
             }

@@ -50,4 +50,6 @@
     <string name="pho">Pho</string>
     <string name="des">Description</string>
     <string name="amount">5</string>
+    <string name="orderHistory">Order History</string>
+    <string name="feedback">Feedback</string>
 </resources>

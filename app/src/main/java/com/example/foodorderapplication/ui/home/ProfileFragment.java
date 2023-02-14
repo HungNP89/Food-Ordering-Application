@@ -15,7 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.foodorderapplication.R;
-import com.example.foodorderapplication.activities.EntryMenu;
+import com.example.foodorderapplication.activities.LoginActivity;
 import com.example.foodorderapplication.models.UserProfileModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -85,7 +85,7 @@ public class ProfileFragment extends Fragment {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()) {
                                     Toast.makeText(getActivity(),"Account Deleted",Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(getActivity(), EntryMenu.class);
+                                    Intent intent = new Intent(getActivity(), LoginActivity.class);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);

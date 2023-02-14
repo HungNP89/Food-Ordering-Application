@@ -26,7 +26,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.HashMap;
 
-public class RegisterMenu extends AppCompatActivity {
+public class RegisterActivity extends AppCompatActivity {
     TextView textViewLogin;
 
     TextInputLayout Username, Email, Password, ConfirmPassword, Address;
@@ -40,14 +40,14 @@ public class RegisterMenu extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register_menu);
+        setContentView(R.layout.activity_register);
 
         textViewLogin = findViewById(R.id.tvLogin);
         textViewLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent movedSignIn = new Intent(RegisterMenu.this,
-                        EntryMenu.class);
+                Intent movedSignIn = new Intent(RegisterActivity.this,
+                        LoginActivity.class);
                 startActivity(movedSignIn);
                 finish();
             }
@@ -73,7 +73,7 @@ public class RegisterMenu extends AppCompatActivity {
                 address = Address.getEditText().getText().toString().trim();
 
                 if (isValid()) {
-                    final ProgressDialog mDialog = new ProgressDialog(RegisterMenu.this);
+                    final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
                     mDialog.setCancelable(false);
                     mDialog.setCanceledOnTouchOutside(false);
                     mDialog.setMessage("Sign Up is now processing , please wait ...");
@@ -108,7 +108,7 @@ public class RegisterMenu extends AppCompatActivity {
                                                             @Override
                                                             public void onComplete(@NonNull Task<Void> task) {
                                                                 if (task.isSuccessful()) {
-                                                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterMenu.this);
+                                                                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
                                                                     builder.setMessage("Registered! Please verify your email");
                                                                     builder.setCancelable(false);
                                                                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {

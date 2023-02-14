@@ -16,7 +16,6 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.example.foodorderapplication.Add.GlideApp;
 import com.example.foodorderapplication.R;
-import com.example.foodorderapplication.adapters.VerticalMenuAdapter2;
 import com.example.foodorderapplication.models.DealMenuModel;
 import com.example.foodorderapplication.models.ShowFromCatModel;
 import com.example.foodorderapplication.models.VerticalMenuModel2;
@@ -42,6 +41,7 @@ public class DetailedActivity extends AppCompatActivity {
 
     int totalQuantity = 1;
     int totalPrice = 0;
+    int ProductPrice = 0;
 
     VerticalMenuModel2 verticalMenuModel2 = null;
     ShowFromCatModel showCat = null;
@@ -98,6 +98,7 @@ public class DetailedActivity extends AppCompatActivity {
             price.setText(String.valueOf(verticalMenuModel2.getPrice()));
             rating.setRating(verticalMenuModel2.getRating());
 
+            ProductPrice = verticalMenuModel2.getPrice();
             totalPrice = verticalMenuModel2.getPrice() * totalQuantity;
         }
 
@@ -108,6 +109,7 @@ public class DetailedActivity extends AppCompatActivity {
             price.setText(String.valueOf(showCat.getPrice()));
             rating.setRating(showCat.getRating());
 
+            ProductPrice = showCat.getPrice();
             totalPrice = showCat.getPrice() * totalQuantity;
         }
 
@@ -118,6 +120,7 @@ public class DetailedActivity extends AppCompatActivity {
             price.setText(String.valueOf(showDeal.getPrice()));
             rating.setRating(showDeal.getRating());
 
+            ProductPrice = showDeal.getPrice();
             totalPrice = showDeal.getPrice() * totalQuantity;
         }
 
@@ -175,23 +178,36 @@ public class DetailedActivity extends AppCompatActivity {
         cartMap.put("currentTime", saveCurrentTime);
         cartMap.put("productDate", saveCurrentDate);
         cartMap.put("productName", name.getText().toString());
-        cartMap.put("productPrice", price.getText().toString());
+        cartMap.put("productPrice", ProductPrice);
         cartMap.put("totalQuantity", quantity.getText().toString());
         cartMap.put("totalPrice", totalPrice);
 
-        db.collection("AddToCart").document(fAuth.getCurrentUser().getUid())
-                .collection("Users").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+        db.collection("UserOrder").document(fAuth.getCurrentUser().getUid())
+                .collection("Add To Cart").add(cartMap).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
+                        Thread thread = new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                try {
+                                    Thread.sleep(2000);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                } finally {
+                                    finish();
+                                }
+                            }
+                        });
+                        thread.start();
                         Toast.makeText(DetailedActivity.this, "Add To Cart", Toast.LENGTH_SHORT).show();
-                        finish();
+                        //finish();
                     }
                 });
 
     }
 
     public void onBackPressed() {
-        Intent intent = new Intent(DetailedActivity.this, Home.class);
+        Intent intent = new Intent(DetailedActivity.this, HomeActivity.class);
         startActivity(intent);
         finish();
     }

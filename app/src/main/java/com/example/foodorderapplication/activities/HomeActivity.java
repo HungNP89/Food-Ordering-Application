@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.widget.Toast;
 
 import com.example.foodorderapplication.R;
-import com.example.foodorderapplication.ui.home.CartFragment;
+import com.example.foodorderapplication.databinding.ActivityHomeBinding;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.navigation.NavController;
@@ -18,12 +18,11 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.foodorderapplication.databinding.ActivityHomeBinding;
 import com.google.firebase.auth.FirebaseAuth;
 
 import javax.annotation.Nonnull;
 
-public class Home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityHomeBinding binding;
@@ -74,7 +73,7 @@ public class Home extends AppCompatActivity {
 
         if (id == R.id.menu_logout) {
             auth.signOut();
-            startActivity(new Intent(Home.this, EntryMenu.class));
+            startActivity(new Intent(HomeActivity.this, LoginActivity.class));
             Toast.makeText(this,"Logout",Toast.LENGTH_SHORT).show();
             finish();
         }

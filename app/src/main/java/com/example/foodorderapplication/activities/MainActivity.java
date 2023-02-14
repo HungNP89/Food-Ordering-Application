@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         new Handler().postDelayed(() -> {
-            Intent intent = new Intent(MainActivity.this, EntryMenu.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
         }, 3000);
